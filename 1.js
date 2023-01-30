@@ -1,25 +1,17 @@
-/*
-
-// JS Basics
-
-/* EXERCISE A
-
+/* JS Basics
+EXERCISE A
 Create a variable called test and assign a string value to it.
-
-
 */
 
 let test = "this is my variable";
-console.log(test);
+//console.log(test);
 
 /* EXERCISE B
-
 Create a variable called sum and assign to it the result of the sum between the numbers 10 and 20.
-
 */
 
 let sum = 10 + 20;
-console.log(sum);
+//console.log(sum);
 
 /* EXERCISE C
 Create a variable called random and assign to it a random number between 0 and 20 
@@ -27,7 +19,7 @@ Create a variable called random and assign to it a random number between 0 and 2
 */
 
 let random = Math.floor(Math.random() * 20);
-console.log(random);
+//console.log(random);
 
 /* EXERCISE D
 Create a variable called me and assign to it an object containing the following information: name = your name, surname = your surname, age = your age.
@@ -38,29 +30,29 @@ const me = {
   surname: "orminska",
   age: "30",
 };
-console.log(me);
+//console.log(me);
 
 /* EXERCISE E
-Write a piece of code for programmatically removing the age property from the previously create object.
+Write a piece of code for programmatically removing the age property from the previously created object.
 */
 
-console.log(delete me.age); //deleting age
-console.log(me.age); //checking if it's delited -> result undefined
-console.log(me); //checking again - no age in the object
+delete me.age; //deleting age
+//console.log(me.age); //checking if it's deleted -> result undefined
+//console.log(me); //checking again - no age in the object
 
 /* EXERCISE F
 Write a piece of code for programmatically adding to the me object you defined before an array called skills, containing the programming languages you know right now.
 */
 
-me.skills = ["js", "ts"];
-console.log(me);
-console.log(me.skills[1]);
+me.skills = ["js", "css"];
+//console.log(me);
+//console.log(me.skills[1]);
 
 /* EXERCISE G
 Write a piece of code for programmatically removing the last skill from the skills array inside the me object.
 */
-console.log(me.skills.pop()); //removing last skill from an array
-console.log(me); //checking if it worked
+me.skills.pop(); //removing last skill from an array
+//console.log(me); //checking if it worked
 
 // JS Functions
 
@@ -68,10 +60,10 @@ console.log(me); //checking if it worked
 Write a function called dice; it should randomize an integer number between 1 and 6.
 */
 
-const dice = function (x) {
-  return Math.ceil(Math.random() * x);
+const dice = () => {
+  return Math.ceil(Math.random() * 6);
 };
-console.log(dice(6));
+console.log(dice());
 
 /* EXERCISE 2
 Write a function called whoIsBigger which receives 2 numbers as parameters and returns the biggest one.
@@ -94,23 +86,24 @@ Ex.: splitMe("I love coding") => returns ["I", "Love", "Coding"]
 const splitMe = function (string) {
   return string.split(" ");
 };
-console.log(splitMe("ale mnie nakurwia łeb"));
+console.log(splitMe("i have a huge headache"));
 
 /* EXERCISE 4
 Write a function called deleteOne which receives a string and a boolean as parameters.
 If the boolean value is true it should return the string without the first letter, otherwise it should remove the last one from it.
 */
-let myBool = "1";
-const string1 = "EXERCISE 4: this is a random text";
+let myBool = true;
+const string1 = "this is a random text";
 
-const delOne = function () {
-  if (myBool === "1") {
-    return string1.slice(1);
+const delOne = function (Boolean, string) {
+  if (Boolean === true) {
+    return string.slice(1);
   } else {
-    return string1.slice(0, -1);
+    return string.slice(0, -1);
   }
 };
-console.log(delOne(string1));
+console.log(delOne(myBool, string1));
+console.log(delOne(!myBool, string1));
 
 /* EXERCISE 5
 Write a function called onlyLetters which receives a string as a parameter and returns it removing all the digits.
@@ -128,75 +121,94 @@ console.log("This is exercise 5 ---> " + onlyLetters(trialtext));
 Write a function called isThisAnEmail which receives a string as a parameter and returns true if the string is a valid email address.
 */
 
+const isThisAnEmail = (string) => {
+  return string.indexOf("@") > 0 && string.indexOf(".") > 0;
+  //^S+@\S+\.\S+$/.test(string);
+};
+console.log(isThisAnEmail("agata@yahoo.pl"), "hw check ex6");
 /* EXERCISE 7
 Write a function called whatDayIsIt that should return the current day of the week.
 */
 
+const whatDayIsIt = () => {
+  currentDate = new Date();
+  const options = { weekday: "long" };
+  return new Intl.DateTimeFormat("en-US", options).format(currentDate);
+};
+console.log(`today is ${whatDayIsIt()}`);
+
 /* EXERCISE 8
 
 Write a function called rollTheDices which receives a number as a parameter.
-
 It should invoke the dice() function defined in Ex1 the specified amount of times,
-
 and return an object containing a sum property holding the sum of all values extracted
-
 and a values array containing the single values of the dicerolls themselves.
-
 Example: RollTheDices(3) => returns {
-
 sum: 10
-
 values: [3, 3, 4]
-
-
-const dice = function (x) {
-  return Math.floor(Math.random() * x);
-};
-
-}
 */
-const rollTheDices = function (x2) {
-  const suma = [];
-  let sumasum = 0 + suma;
-  for (let roll = 0; roll < x2; roll++) {
-    const gownopsie = dice(6);
-    suma.push(gownopsie);
+const rollTheDices = function (x) {
+  let sum = [];
+  let sumsum = 0;
+  for (let roll = 0; roll < x; roll++) {
+    let singleRoll = dice();
+    sum.push(singleRoll);
+    sumsum += singleRoll;
   }
-  return suma;
+  return console.log(sumsum, "this is the sum of the arr:", sum);
 };
-console.log(rollTheDices(2));
+rollTheDices(2);
 
 /* EXERCISE 9
-Write a function called howManyDays which receives a date as a parameter and returns the number of days passed since that date.
+Write a function called howManyDays which receives a date as a parameter and returns the number of days passed since that date.*/
 
-
+const howManyDays = (date) => {
+  const now = new Date();
+  //new Date() is by default set as today's date
+  const diffTime = now - date;
+  const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+  return diffDays;
+};
 
 /* EXERCISE 10
 Write a function called isTodayMyBirthday which should return true if today’s your birthday, false otherwise.
 */
-const agataBday = Date(10 - 08);
-let randomDay = Date(02 - 22);
+const myBirthday = new Date(1992, 9, 8);
+const randomDay = new Date(22, 2, 22);
 
-function isTodayMyBirthday(x) {
-  if (Date(x) === Date(10 - 08)) {
-    return "today is my birthday";
-  } else return "nope";
+function isTodayMyBday(date) {
+  let birthdate = new Date(1992, 9, 8);
+  return (
+    date.getMonth() == birthdate.getMonth() &&
+    date.getDate() == birthdate.getDate()
+  );
 }
 
-console.log(isTodayMyBirthday(agataBday));
-console.log(isTodayMyBirthday(randomDay));
+console.log(isTodayMyBday(myBirthday));
+console.log(isTodayMyBday(randomDay));
 
 // JS Arrays & Objects
-
 // NOTE: the movies array used in some exercises is defined at the end of this file
 
 /* EXERCISE 11
 
 Write a function called deleteProp which receives an object and a string as parameters,
-
 and returns the given object after deleting its property named as the given string.
 
 */
+const myDog = {
+  name: "Roger",
+  breed: "golden retriever",
+  species: "dog",
+  cute: "as fuck",
+};
+
+const deleteProp = (object, string) => {
+  delete object[string];
+  return object;
+};
+console.log(deleteProp(myDog, "breed"));
+//console.log(myDog.breed); //double checking if it worked
 
 /* EXERCISE 12
 Write a function called oldestMovie which finds the oldest movie in the provided movies array.
@@ -239,49 +251,65 @@ Write a function called "removeIndex" which receives a number as a parameter and
 // [EXTRAS] JS Advanced
 
 /* EXERCISE 21
-
 Create a function called "halfTree" which receives a number as a parameter and builds an "*" half tree with the given height.
-
 Example:
-
 halfTree(3)
-
 *
-
 **
-
 ***
-
 */
-
+const halfTree = (height) => {
+  for (let i = 0; i < height; i++) {
+    let stars = "*".repeat(2 * i + 1);
+    console.log(stars);
+  }
+};
+halfTree(4);
 /* EXERCISE 22
-
 Create a function called "tree" which receives a number as a parameter and builds an "*" tree with the given height.
-
 Example:
-
 tree(3)
-
 *
-
 ***
-
 *****
-
 */
 
+const tree = (x) => {
+  let treeHeight = x;
+  let tree = [];
+  let star = "*";
+
+  for (let index = 0; index < treeHeight; index++) {
+    tree.push(star);
+    console.log(tree);
+  }
+};
+console.log(tree(5));
+
+const treeTwo = function (height) {
+  for (let i = 0; i < height; i++) {
+    let stars = "*".repeat(2 * i + 1);
+    let spacesBefore = " ".repeat(height - i - 1);
+    console.log(spacesBefore + stars);
+  }
+};
+treeTwo(10);
 /* EXERCISE 23
 
 Create a function called "isItPrime" that receives a number as a parameter and returns true if the given number is a prime number.
 
 */
+const isItPrime = function (x) {
+  for (let i = 2; i < x; i++) {
+    if (x % i === 0) {
+      return false;
+    }
+  }
 
-/* WHEN YOU ARE FINISHED
-
-Commit and push the code to your personal GitHub repository; then post the link of your commit on the Homework section of today’s Eduflow.
-
-*/
-
+  return true;
+};
+console.log(isItPrime(5));
+console.log(isItPrime(4));
 /* This movies array is used throughout the exercises. You’re not supposed to alter it. */
 
 const movies = [
