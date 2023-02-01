@@ -189,129 +189,6 @@ console.log(isTodayMyBday(randomDay));
 
 // JS Arrays & Objects
 // NOTE: the movies array used in some exercises is defined at the end of this file
-
-/* EXERCISE 11
-
-Write a function called deleteProp which receives an object and a string as parameters,
-and returns the given object after deleting its property named as the given string.
-
-*/
-const myDog = {
-  name: "Roger",
-  breed: "golden retriever",
-  species: "dog",
-  cute: "as fuck",
-};
-
-const deleteProp = (object, string) => {
-  delete object[string];
-  return object;
-};
-console.log(deleteProp(myDog, "breed"));
-//console.log(myDog.breed); //double checking if it worked
-
-/* EXERCISE 12
-Write a function called oldestMovie which finds the oldest movie in the provided movies array.
-*/
-
-/* EXERCISE 13
-Write a function called countMovies which returns the number of movies contained in the provided movies array.
-*/
-
-/* EXERCISE 14
-Write a function called onlyTheTitles which creates an array with just the titles of the movies contained in the provided movies array.
-*/
-
-/* EXERCISE 15
-Write a function called onlyInThisMillennium which returns only the movies produced in this millennium from the provided movies array.
-*/
-
-/* EXERCISE 16
-Write a function called getMovieById which receives an id as a parameter and returns the movie with the given id from the provided movies array.
-*/
-
-/* EXERCISE 17
-Write a function called sumAllTheYears which returns the sum of all the years in which the movies in the provided movies array have been produced.
-*/
-
-/* EXERCISE 18
-Write a function called searchByTitle which receives a string as a parameter and returns all the movies in the provided movies array which contain that string in the title.
-*/
-
-/* EXERCISE 19
-Write a function called searchAndDivide which receives a string as a parameter and returns an object;
-this object should contain an array called match, made by all the movies from the provided movies array which contain the given string in the title,
-and another array unmatch with all the remaining ones.
-*/
-
-/* EXERCISE 20
-Write a function called "removeIndex" which receives a number as a parameter and returns the provided movies array without the element in the given position.
-*/
-
-// [EXTRAS] JS Advanced
-
-/* EXERCISE 21
-Create a function called "halfTree" which receives a number as a parameter and builds an "*" half tree with the given height.
-Example:
-halfTree(3)
-*
-**
-***
-*/
-const halfTree = (height) => {
-  for (let i = 0; i < height; i++) {
-    let stars = "*".repeat(2 * i + 1);
-    console.log(stars);
-  }
-};
-halfTree(4);
-/* EXERCISE 22
-Create a function called "tree" which receives a number as a parameter and builds an "*" tree with the given height.
-Example:
-tree(3)
-*
-***
-*****
-*/
-
-const tree = (x) => {
-  let treeHeight = x;
-  let tree = [];
-  let star = "*";
-
-  for (let index = 0; index < treeHeight; index++) {
-    tree.push(star);
-    console.log(tree);
-  }
-};
-console.log(tree(5));
-
-const treeTwo = function (height) {
-  for (let i = 0; i < height; i++) {
-    let stars = "*".repeat(2 * i + 1);
-    let spacesBefore = " ".repeat(height - i - 1);
-    console.log(spacesBefore + stars);
-  }
-};
-treeTwo(10);
-/* EXERCISE 23
-
-Create a function called "isItPrime" that receives a number as a parameter and returns true if the given number is a prime number.
-
-*/
-const isItPrime = function (x) {
-  for (let i = 2; i < x; i++) {
-    if (x % i === 0) {
-      return false;
-    }
-  }
-
-  return true;
-};
-console.log(isItPrime(5));
-console.log(isItPrime(4));
-/* This movies array is used throughout the exercises. You’re not supposed to alter it. */
-
 const movies = [
   {
     Title: "The Lord of the Rings: The Fellowship of the Ring",
@@ -495,3 +372,192 @@ const movies = [
       "https://m.media-amazon.com/images/M/MV5BMTc5MDE2ODcwNV5BMl5BanBnXkFtZTgwMzI2NzQ2NzM@._V1_SX300.jpg",
   },
 ];
+
+/* EXERCISE 11
+
+
+Write a function called deleteProp which receives an object and a string as parameters,
+and returns the given object after deleting its property named as the given string.
+
+*/
+const myDog = {
+  name: "Roger",
+  breed: "golden retriever",
+  species: "dog",
+  cute: "as fuck",
+};
+
+const deleteProp = (object, string) => {
+  delete object[string];
+  return object;
+};
+console.log(deleteProp(myDog, "breed"));
+//console.log(myDog.breed); //double checking if it worked
+
+/* EXERCISE 12
+Write a function called oldestMovie which finds the oldest movie in the provided movies array.
+*/
+const oldestMovie = () => {
+  let movieArr = movies.map((movie) => parseInt(movie.Year));
+  let oldestMovie = Math.max(...movieArr);
+  return oldestMovie;
+};
+console.log(oldestMovie());
+/* EXERCISE 13
+Write a function called countMovies which returns the number of movies contained in the provided movies array.
+*/
+const countMovies = () => {
+  return movies.length;
+};
+//console.log(countMovies());
+/* EXERCISE 14
+Write a function called onlyTheTitles which creates an array with just the titles of the movies 
+contained in the provided movies array.
+*/
+const onlyTheTitles = () => {
+  return movies.map((movie) => movie.Title);
+};
+console.log(onlyTheTitles());
+/* EXERCISE 15
+Write a function called onlyInThisMillennium which returns only the movies produced in this 
+millennium from the provided movies array.
+*/
+const onlyInThisMillennium = () => {
+  let moviesArr = [];
+  for (let i = 0; i < movies.length; i++) {
+    if (parseInt(movies[i].Year) > 2000) moviesArr.push(movies[i]);
+  }
+  return moviesArr;
+};
+// console.log(onlyInThisMillennium());
+/* EXERCISE 16
+Write a function called getMovieById which receives an id as a parameter and returns the movie with the 
+given id from the provided movies array.
+*/
+const getMovieById = (id) => {
+  let index = movies.findIndex((movie) => movie.imdbID === id);
+  return movies[index];
+};
+console.log(getMovieById("tt4154796"));
+
+/* EXERCISE 17
+Write a function called sumAllTheYears which returns the sum of all the years in which the movies in the 
+provided movies array have been produced.
+*/
+const sumAllTheYears = () => {
+  let numbers = movies.map((movie) => parseInt(movie.Year));
+  let total = 0;
+  numbers.map((num) => (total += num));
+  return total;
+};
+console.log(sumAllTheYears());
+/* EXERCISE 18
+Write a function called searchByTitle which receives a string as a parameter and returns all the movies
+ in the provided movies array which contain that string in the title.
+*/
+const searchByTitle = (string) => {
+  let matches = [];
+  for (let index = 0; index < movies.length; index++) {
+    if (movies[index].Title.toLowerCase().indexOf(string) !== -1) {
+      matches.push(movies[index]);
+    }
+  }
+
+  return matches;
+};
+//console.log(searchByTitle("avengers"));
+
+/* EXERCISE 19
+Write a function called searchAndDivide which receives a string as a parameter and returns an object;
+this object should contain an array called match, made by all the movies from the provided movies array 
+which contain the given string in the title,
+and another array unmatch with all the remaining ones.
+*/
+const searchAndDivide = (string) => {
+  let result = {
+    match: [],
+    unmatch: [],
+  };
+  for (let i = 0; i < movies.length; i++) {
+    if (movies[i].Title.toLowerCase().indexOf(string) !== -1) {
+      result.match.push(movies[i]);
+    } else {
+      result.unmatch.push(movies[i]);
+    }
+  }
+  return result;
+};
+//console.log(searchAndDivide("lord"));
+
+/* EXERCISE 20
+Write a function called "removeIndex" which receives a number as a parameter and returns the provided 
+movies array without the element in the given position.
+*/
+const removeIndex = (x) => {
+  delete movies[x];
+  return movies;
+};
+// [EXTRAS] JS Advanced
+
+/* EXERCISE 21
+Create a function called "halfTree" which receives a number as a parameter and builds an "*" half tree with the given height.
+Example:
+halfTree(3)
+*
+**
+***
+*/
+const halfTree = (height) => {
+  for (let i = 0; i < height; i++) {
+    let stars = "*".repeat(2 * i + 1);
+    console.log(stars);
+  }
+};
+halfTree(4);
+/* EXERCISE 22
+Create a function called "tree" which receives a number as a parameter and builds an "*" tree with the given height.
+Example:
+tree(3)
+*
+***
+*****
+*/
+
+const tree = (x) => {
+  let treeHeight = x;
+  let tree = [];
+  let star = "*";
+
+  for (let index = 0; index < treeHeight; index++) {
+    tree.push(star);
+    console.log(tree);
+  }
+};
+console.log(tree(5));
+
+const treeTwo = function (height) {
+  for (let i = 0; i < height; i++) {
+    let stars = "*".repeat(2 * i + 1);
+    let spacesBefore = " ".repeat(height - i - 1);
+    console.log(spacesBefore + stars);
+  }
+};
+treeTwo(10);
+/* EXERCISE 23
+
+Create a function called "isItPrime" that receives a number as a parameter and returns true if the given number is a prime number.
+
+*/
+const isItPrime = function (x) {
+  for (let i = 2; i < x; i++) {
+    if (x % i === 0) {
+      return false;
+    }
+  }
+
+  return true;
+};
+console.log(isItPrime(5));
+console.log(isItPrime(4));
+
+/* This movies array is used throughout the exercises. You’re not supposed to alter it. */
